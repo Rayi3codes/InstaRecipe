@@ -1,16 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
-
-    [SerializeField]
-    private GameObject loginPanel;
-
-    [SerializeField]
-    private GameObject registrationPanel;
 
     private void Awake()
     {
@@ -23,17 +18,19 @@ public class UIManager : MonoBehaviour
         {
             Instance = this;
         }
+        else
+        {
+            Destroy(gameObject); // Prevent duplicate UIManager instances
+        }
     }
 
-    public void OpenLoginPanel()
+    public void LoadLoginScene()
     {
-        loginPanel.SetActive(true);
-        registrationPanel.SetActive(false);
+        SceneManager.LoadScene("LOGIN"); // Replace with your actual scene name
     }
 
-    public void OpenRegistrationPanel()
+    public void LoadRegistrationScene()
     {
-        registrationPanel.SetActive(true);
-        loginPanel.SetActive(false);
+        SceneManager.LoadScene("REGISTER"); // Replace with your actual scene name
     }
 }
