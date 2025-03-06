@@ -8,6 +8,15 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/LANDING PAGE.unity
+    guid: 7218eeae52698a546ad2b930a9b6091b
+  - enabled: 1
+    path: Assets/Scenes/CREATEACC.unity
+    guid: 660a6a93587e88d4e8a26536a09d9301
+  - enabled: 1
+    path: Assets/Scenes/LOGIN.unity
+    guid: 921e984a4e6ffe144b64ab1b389ba1ff
   m_configObjects:
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: c67785b55ddaa24468dee74e95d7a6e0, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
