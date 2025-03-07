@@ -19,9 +19,7 @@ MonoBehaviour:
   m_PlatformBuildProfile:
     rid: 7963938771597263099
   m_OverrideGlobalSceneList: 1
-  m_Scenes:
-  - m_enabled: 1
-    m_path: Assets/Scenes/CREATEACC.unity
+  m_Scenes: []
   m_ScriptingDefines:
   - 
   m_PlayerSettingsYaml:
