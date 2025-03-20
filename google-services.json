@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "154364098155",
+    "project_id": "instarecipietesting",
+    "storage_bucket": "instarecipietesting.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:154364098155:android:b00f9c7e1be6d2b427e32e",
+        "android_client_info": {
+          "package_name": "com.DefaultCompany.com.unity.template.mobile2D"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBebB7wCeOyhnRupAw7bmWd51_BpCfBE48"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

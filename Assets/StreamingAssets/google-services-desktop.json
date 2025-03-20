@@ -2,7 +2,8 @@
   "project_info": {
     "project_number": "154364098155",
     "project_id": "instarecipietesting",
-    "storage_bucket": "instarecipietesting.firebasestorage.app"
+    "storage_bucket": "instarecipietesting.firebasestorage.app",
+    "firebase_url": "https://instarecipietesting-default-rtdb.europe-west1.firebasedatabase.app/"
   },
   "client": [
     {
