@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;  
+using TMPro;
 using UnityEngine.UI;
 using Firebase;
 using Firebase.Database;
@@ -11,9 +11,11 @@ using System.Linq;
 
 public class FirebaseSearch : MonoBehaviour
 {
-    public TMP_InputField searchInput;  
+    public TMP_InputField searchInput;
     public Button searchButton;
-    public TMP_Text resultText;       
+    public TMP_Text recipeNameText;       // For displaying the recipe name
+    public TMP_Text recipeIngredientsText; // For displaying the ingredients
+    public TMP_Text recipeDirectionsText;  // For displaying the directions
     public Image recipeImage;
 
     private DatabaseReference dbReference;
@@ -40,19 +42,26 @@ public class FirebaseSearch : MonoBehaviour
 
     void SearchRecipe(string recipeName)
     {
+        // Clear previous results
+        recipeNameText.text = "";
+        recipeIngredientsText.text = "";
+        recipeDirectionsText.text = "";
+        recipeImage.sprite = null;
+
         if (string.IsNullOrEmpty(recipeName))
         {
-            resultText.text = "Please enter a recipe name.";
+            recipeNameText.text = "Please enter a recipe name.";
             return;
         }
 
+        // Use the root reference since recipes are at the root of the JSON structure
         FirebaseDatabase.DefaultInstance
-            .GetReference("recipes")  // Ensure this matches your Firebase database structure
+            .GetReference("")
             .GetValueAsync().ContinueWithOnMainThread(task =>
             {
                 if (task.IsFaulted)
                 {
-                    resultText.text = "Error fetching data!";
+                    recipeNameText.text = "Error fetching data!";
                 }
                 else if (task.IsCompleted)
                 {
@@ -61,25 +70,31 @@ public class FirebaseSearch : MonoBehaviour
 
                     foreach (var child in snapshot.Children)
                     {
-                        string name = child.Child("recipe_name").Value.ToString();
-
-                        if (name.ToLower().Contains(recipeName.ToLower()))
+                        if (child.Child("recipe_name").Exists && child.Child("recipe_name").Value != null)
                         {
-                            found = true;
-                            string ingredients = child.Child("ingredients").Value.ToString();
-                            string directions = child.Child("cooking_directions").Value.ToString();
-                            string imageUrl = child.Child("image_url").Value.ToString();
+                            string name = child.Child("recipe_name").Value.ToString();
 
-                            resultText.text = $"<b>Recipe:</b> {name}\n\n<b>Ingredients:</b>\n{ingredients}\n\n<b>Directions:</b>\n{directions}";
+                            if (name.ToLower().Contains(recipeName.ToLower()))
+                            {
+                                found = true;
+                                string ingredients = child.Child("ingredients").Value.ToString();
+                                string directions = child.Child("cooking_directions").Value.ToString();
+                                string imageUrl = child.Child("image_url").Value.ToString();
 
-                            StartCoroutine(LoadImage(imageUrl));
-                            break;
+                                // Set the separate text fields
+                                recipeNameText.text = name;
+                                recipeIngredientsText.text = ingredients;
+                                recipeDirectionsText.text = directions;
+
+                                StartCoroutine(LoadImage(imageUrl));
+                                break;
+                            }
                         }
                     }
 
                     if (!found)
                     {
-                        resultText.text = "Recipe not found!";
+                        recipeNameText.text = "Recipe not found!";
                     }
                 }
             });
